@@ -6,12 +6,13 @@ through an HTTP API. If the class provides a PORT class variable, the API is
 set up and handles by default the /shutdown
 """
 
+import sys
 import time
 import traceback
-import urllib
 import threading
 import json
 import logging
+import requests
 
 from werkzeug.wrappers import Request, Response
 from werkzeug.serving import run_simple
@@ -42,14 +43,25 @@ class base():
   def log(self, msg):
     print(self.__class__.__name__ + " : " + msg)
 
+  def fatal(self, msg):
+    self.log("ERROR: " + msg)
+    sys.exit(1)
+
+  def run_api(self):
+    try:
+      run_simple( "localhost", self.PORT, self )
+    except OSError as e:
+      self.running = False
+      self.fatal("Couldn't start API, probably the port is in use.")
+
   # run method starts the service
   def run(self):
     # start API in a thread, if we have a port
+    self.running = True
     if self.PORT:
-      threading.Timer(0, run_simple, ["localhost", self.PORT, self] ).start()
-      time.sleep(1)
+      threading.Timer(0, self.run_api).start()
     try:
-      self.running = True
+      time.sleep(1)  # wait 1s to catch e.g. port in use errors
       while self.running:
         self.loop()
     except KeyboardInterrupt:
@@ -87,13 +99,9 @@ class base():
     if cls.PORT:
       url = "http://localhost:" + str(cls.PORT) + "/" + action
       if data:
-        payload = json.dumps(data)
-        req = urllib.request.Request(url, payload, {'Content-Type': 'application/json'})
-        f = urllib3.urlopen(req)
-        response = f.read()
-        f.close()
+        requests.post(url, json=data)
       else:
-        urllib.request.urlopen(url).read()
+        requests.get(url)
 
   # decorator for registering handlers
   @classmethod
