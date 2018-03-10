@@ -52,10 +52,28 @@ if __name__ == "__main__":
   Test().run()
 ```
 
+Preliminary step: setup your minimal environment (when running directory from the repository):
+
+```bash
+$ virtualenv venv
+Using base prefix '/usr/local/Cellar/python3/3.6.1/Frameworks/Python.framework/Versions/3.6'
+New python executable in /Users/xtof/Workspace/2know/novid/py-servicefactory/venv/bin/python3.6
+Also creating executable in /Users/xtof/Workspace/2know/novid/py-servicefactory/venv/bin/python
+Installing setuptools, pip, wheel...done.
+
+$ . venv/bin/activate
+
+(venv) $ pip install -r requirements.txt 
+Collecting Werkzeug==0.14.1 (from -r requirements.txt (line 1))
+  Using cached Werkzeug-0.14.1-py2.py3-none-any.whl
+Installing collected packages: Werkzeug
+Successfully installed Werkzeug-0.14.1
+```
+
 Run it ...
 
 ```bash
-$ PYTHONPATH=. python servicefactory/TestService.py 
+(venv) $ PYTHONPATH=. python servicefactory/TestService.py
 Test : looping...
 Test : looping...
 ```
@@ -72,13 +90,13 @@ And observe the output of the `TestService.py` script:
 ```bash
 Test : looping...
 handling action...
-"hello world"
+b'hello world'
 ```
 
 Now open a python REPL promp:
 
-```python
-$ PYTHONPATH=. python
+```bash
+(venv) $ PYTHONPATH=. python
 Python 2.7.13 (default, May 24 2017, 12:12:01) 
 [GCC 4.2.1 Compatible Apple LLVM 8.1.0 (clang-802.0.42)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
@@ -91,7 +109,7 @@ And again observe the output of the `TestService.py` script:
 ```bash
 Test : looping...
 handling action...
-"hello world"
+b'hello world'
 ```
 
 Finally (for now) go back to the running `TestService.py` script and interrupt the script using `Ctrl+c`:
@@ -99,6 +117,9 @@ Finally (for now) go back to the running `TestService.py` script and interrupt t
 ```bash
 Test : looping...
 ^CTest : shutdown requested
+
+(venv) $ deactivate
+
 $ 
 ```
 

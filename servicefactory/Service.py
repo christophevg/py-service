@@ -8,7 +8,7 @@ set up and handles by default the /shutdown
 
 import time
 import traceback
-import urllib2
+import urllib
 import threading
 import json
 import logging
@@ -40,7 +40,7 @@ class base():
   # helper method to log
   # TODO log to cloud, file,...
   def log(self, msg):
-    print self.__class__.__name__ + " : " + msg
+    print(self.__class__.__name__ + " : " + msg)
 
   # run method starts the service
   def run(self):
@@ -88,12 +88,12 @@ class base():
       url = "http://localhost:" + str(cls.PORT) + "/" + action
       if data:
         payload = json.dumps(data)
-        req = urllib2.Request(url, payload, {'Content-Type': 'application/json'})
-        f = urllib2.urlopen(req)
+        req = urllib.request.Request(url, payload, {'Content-Type': 'application/json'})
+        f = urllib3.urlopen(req)
         response = f.read()
         f.close()
       else:
-        urllib2.urlopen(url).read()
+        urllib.request.urlopen(url).read()
 
   # decorator for registering handlers
   @classmethod

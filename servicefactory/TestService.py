@@ -14,8 +14,8 @@ class Test(Service.base):
 
   @Service.API.handle("action")
   def handle_action(self, data):
-    print "handling action..."
-    print data
+    print("handling action...")
+    print(data)
 
 if __name__ == "__main__":
   Test().run()
