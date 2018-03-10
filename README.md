@@ -2,7 +2,21 @@
 
 > A highly opinionated and very convention-driven framework for creating Python "services"
 
-That being said ...
+That being said, below the Getting Started section I provide some rationale ... But first...
+
+## Getting Started
+
+This Service Factory is hosted on [PyPi](https://pypi.org/project/servicefactory/), so using it is super easy (I've stripped the output to focus on your actions):
+
+```bash
+$ mkdir my-service-project
+$ cd my-service-project/
+$ virtualenv venv
+$ . venv/bin/activate
+(venv) $ pip install servicefactory
+```
+
+Now read on for some background information and a complete example that you can paste into e.g. `TestService.py` and run it as shown below.
 
 ## What is a Service?
 
