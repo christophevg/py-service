@@ -12,6 +12,9 @@ class Test(Service.base):
     self.log("looping...")
     time.sleep(5)
 
+  def finalize(self):
+    self.log("finalizing...")
+
   @Service.API.handle("action")
   def handle_action(self, data):
     print("handling action...")

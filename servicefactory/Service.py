@@ -69,11 +69,15 @@ class base():
     except Exception as e:
       self.log("crash: " + str(traceback.format_exc()))
   
+  def finalize(self):
+    pass
+
   def shutdown(self, request):
     self.log("shutdown requested")
     self.running = False
     if self.PORT:
       request.environ.get('werkzeug.server.shutdown')()
+    self.finalize()
   
   # HTTP API implementation
   def dispatch_request(self, request):
