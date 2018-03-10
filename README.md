@@ -137,9 +137,11 @@ Test : looping...
 $ 
 ```
 
-### Property 1: Simple implement your `loop`
+### Property 1: Simply implement your `loop`
 
 Let's not waste time writing an event loop, catching `KeyboardInterrupt` and other boilerplate things. Just implement the `Service.base` class and provide your own `loop` method.
+
+> If you know [Arduino](https://www.arduino.cc) you might recognise this function from that paradigm. I've not included a `setup()` counterpart, since you can do this in your class'  `__init__(self)` constructor ;-)
 
 ### Property 2: Exposed HTTP/JSON API
 
@@ -147,9 +149,9 @@ The service exposes a basic HTTP and JSON based API, which allows interaction wi
 
 Exposing functions is as simple as adding a decorator: `@Service.API.handle("some-action")` to a method in the Service class.
 
-### Property 3: ClassMethod-based calling of exposed API
+### Property 3: Class Method to call the exposed API
 
-Any Python process with access to the Service class, can call into a running instance of the class using a `classmethod`.
+Any Python process with access to the Service class, can call into a running instance of the class using a `classmethod`. For now this is a single `perform(self, action, data)` method.
 
 ### Property 4: Default exposed functionality
 
