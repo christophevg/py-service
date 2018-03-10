@@ -1,6 +1,6 @@
 # Python Service Factory
 
-> An highly opinionated and very convention-driven framework for creating Python "services"
+> A highly opinionated and very convention-driven framework for creating Python "services"
 
 That being said ...
 
