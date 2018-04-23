@@ -101,11 +101,27 @@ class base():
   @classmethod
   def perform(cls, action, data=None):
     if cls.PORT:
-      url = "http://localhost:" + str(cls.PORT) + "/" + action
       if data:
-        requests.post(url, json=data)
+        cls.post(cls.url(action), data)
       else:
-        requests.get(url)
+        cls.get(cls.url(action))
+
+  @classmethod
+  def post(cls, url, data):
+    requests.post(url, json=data)
+
+  @classmethod
+  def get(cls, url):
+    requests.get(url)
+
+  @classmethod
+  def url(cls, action, port=None):
+    if port is None:
+      port = cls.PORT
+    if not port is None:
+      return "http://localhost:" + str(port) + "/" + action
+    else:
+      return None
 
   # decorator for registering handlers
   @classmethod
