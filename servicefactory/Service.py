@@ -102,17 +102,17 @@ class base():
   def perform(cls, action, data=None):
     if cls.PORT:
       if data:
-        cls.post(cls.url(action), data)
+        return cls.post(cls.url(action), data)
       else:
-        cls.get(cls.url(action))
+        return cls.get(cls.url(action))
 
   @classmethod
   def post(cls, url, data):
-    requests.post(url, json=data)
+    return requests.post(url, json=data)
 
   @classmethod
   def get(cls, url):
-    requests.get(url)
+    return requests.get(url)
 
   @classmethod
   def url(cls, action, port=None):
