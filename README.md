@@ -54,16 +54,17 @@ from servicefactory import Service
 class Test(Service.base):
 
   def loop(self):
-    self.log("looping...")
+    print("looping...")
     time.sleep(5)
 
   def finalize(self):
-    self.log("finalizing...")
+    print("finalizing...")
 
   @Service.API.handle("action")
   def handle_action(self, data):
     print("handling action...")
     print(data)
+    return data
 
 if __name__ == "__main__":
   Test().run()

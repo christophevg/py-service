@@ -18,8 +18,7 @@ from werkzeug.wrappers import Request, Response
 from werkzeug.serving import run_simple
 from werkzeug.exceptions import HTTPException, NotFound
 
-log = logging.getLogger("werkzeug")
-log.setLevel(logging.ERROR)
+logging.getLogger("werkzeug").setLevel(logging.ERROR)
 
 class base():
 
@@ -32,19 +31,10 @@ class base():
   
   # incoming API actions can be handled by handlers
   def execute_handler(self, action, data):
-    try:
-      self.HANDLERS[action](self, data)
-    except KeyError:
-      return False
-    return True
-  
-  # helper method to log
-  # TODO log to cloud, file,...
-  def log(self, msg):
-    print(self.__class__.__name__ + " : " + msg)
+    return self.HANDLERS[action](self, data)
 
   def fatal(self, msg):
-    self.log("ERROR: " + msg)
+    logging.error(msg)
     sys.exit(1)
 
   def run_api(self):
@@ -67,17 +57,17 @@ class base():
     except KeyboardInterrupt:
       self.perform("shutdown")
     except Exception as e:
-      self.log("crash: " + str(traceback.format_exc()))
+      logging.error("crash: " + str(traceback.format_exc()))
   
-  def finalize(self):
-    pass
-
   def shutdown(self, request):
-    self.log("shutdown requested")
+    logging.info("shutdown requested")
     self.running = False
     if self.PORT:
       request.environ.get('werkzeug.server.shutdown')()
     self.finalize()
+
+  def finalize(self):
+    pass
   
   # HTTP API implementation
   def dispatch_request(self, request):
@@ -86,7 +76,11 @@ class base():
         "/shutdown" : self.shutdown
       }[request.path](request)
     except KeyError:
-      return Response("ok") if self.execute_handler(request.path, request.data) else NotFound()
+      try:
+        return Response(self.execute_handler(request.path, request.data))
+      except Exception as e:
+        logging.error(str(traceback.format_exc()))
+        NotFound()
     return Response("ok")
 
   def wsgi_app(self, environ, start_response):
