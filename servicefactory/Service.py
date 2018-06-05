@@ -20,7 +20,7 @@ from werkzeug.exceptions import HTTPException, NotFound
 
 logging.getLogger("werkzeug").setLevel(logging.ERROR)
 
-class base():
+class base(object):
 
   PORT     = None
   HANDLERS = {}
