@@ -55,7 +55,7 @@ class base(object):
       while self.running:
         self.loop()
     except KeyboardInterrupt:
-      self.perform("shutdown")
+      self.shutdown()
     except Exception as e:
       logging.error("crash: " + str(traceback.format_exc()))
   
