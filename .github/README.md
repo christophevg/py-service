@@ -11,4 +11,4 @@
 
 ## Documentation
 
-Visit [Read the Docs](https:/servicefactory.readthedocs.org) for the full documentation, including overviews and walkthroughs.
+Visit [Read the Docs](https://servicefactory.readthedocs.org) for the full documentation, including overviews and walkthroughs.
