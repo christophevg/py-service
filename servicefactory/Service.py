@@ -59,10 +59,10 @@ class base(object):
     except Exception as e:
       logging.error("crash: " + str(traceback.format_exc()))
   
-  def shutdown(self, request):
+  def shutdown(self, request=None):
     logging.info("shutdown requested")
     self.running = False
-    if self.PORT:
+    if self.PORT and request:
       request.environ.get('werkzeug.server.shutdown')()
     self.finalize()
 
