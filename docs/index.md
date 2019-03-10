@@ -1,8 +1,13 @@
-# Python Service Factory
+# ServiceFactory
 
 > A highly opinionated and very convention-driven framework for creating Python "services"
 
-That being said, below the Getting Started section I provide some rationale ... But first...
+[![Latest Version on PyPI](https://img.shields.io/pypi/v/servicefactory.svg)](https://pypi.python.org/pypi/servicefactory/)
+[![Supported Implementations](https://img.shields.io/pypi/pyversions/servicefactory.svg)](https://pypi.python.org/pypi/servicefactory/)
+[![Build Status](https://secure.travis-ci.org/christophevg/servicefactory.svg?branch=master)](http://travis-ci.org/christophevg/servicefactory)
+[![Documentation Status](https://readthedocs.org/projects/servicefactory/badge/?version=latest)](https://servicefactory.readthedocs.io/en/latest/?badge=latest)
+[![Coverage Status](https://coveralls.io/repos/github/christophevg/servicefactory/badge.svg?branch=master)](https://coveralls.io/github/christophevg/servicefactory?branch=master)
+[![Built with PyPi Template](https://img.shields.io/badge/PyPi_Template-v0.0.6-blue.svg)](https://github.com/christophevg/servicefactory)
 
 ## Getting Started
 
