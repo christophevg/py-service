@@ -60,6 +60,8 @@ class base(object):
       logging.error("crash: " + str(traceback.format_exc()))
   
   def shutdown(self, request=None):
+    if self.PORT and request is None:
+      return self.perform("shutdown")
     logging.info("shutdown requested")
     self.running = False
     if self.PORT and request:
